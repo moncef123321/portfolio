@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ T.meta_desc }}">
+  <meta property="og:title" content="{{ PROFILE.name }} — Data Analyst & BI">
+  <meta property="og:description" content="{{ PROFILE.tagline }}">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#07111f">
+  <meta property="og:locale" content="{{ T.og_lang }}">
+  {% if PROFILE.photo %}<meta property="og:image" content="{{ url_for('static', filename='photo.jpg', _external=True) }}">{% endif %}
+  <meta name="twitter:card" content="summary">
+  <link rel="alternate" hreflang="fr" href="{{ url_for('home', _external=True) }}">
+  <link rel="alternate" hreflang="en" href="{{ url_for('home_en', _external=True) }}">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2322b8ff'/%3E%3Ctext x='32' y='45' font-size='40' font-weight='800' text-anchor='middle' fill='%23061322' font-family='Arial'%3EM%3C/text%3E%3C/svg%3E">
+  <title>{{ PROFILE.name }} — Data Analyst & BI</title>
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='enhancements.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ T.skip }}</a>
+  <div class="progress" id="progress"></div>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="site-shell">
+    <nav class="navbar">
+      <a class="brand" href="#home" aria-label="Accueil"><span class="brand-mark">M</span><span>Moncef<span class="accent">.</span></span></a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="#about">{{ T.nav_about }}</a><a href="#experience">{{ T.nav_exp }}</a><a href="#skills">{{ T.nav_skills }}</a><a href="#projects">{{ T.nav_projects }}</a><a href="#ml">{{ T.nav_ml }}</a><a href="#contact" class="nav-cta">{{ T.nav_contact }}</a>
+        </div>
+        <a class="lang-toggle" href="{{ T.other_url }}">{{ T.other_lang }}</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="{{ T.aria_theme }}">◐</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="{{ T.menu_open }}" data-open="{{ T.menu_open }}" data-close="{{ T.menu_close }}" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+
+    <main id="main">
+      <header class="hero" id="home">
+        <div class="hero-copy">
+          {% if PROFILE.photo %}<img class="avatar" src="{{ PROFILE.photo }}" alt="{{ T.photo_alt }}" width="96" height="96">{% endif %}
+          <div class="eyebrow"><span class="status-dot"></span> {{ PROFILE.availability }}</div>
+          <p class="hello">{{ T.hello }}</p>
+          <h1>{{ PROFILE.name }}<span class="accent">.</span></h1>
+          <h2>{{ PROFILE.role }}</h2>
+          <p class="hero-text">{{ PROFILE.tagline }}</p>
+          <div class="hero-actions">
+            {% if PROFILE.cv %}<a class="button button-primary" href="{{ PROFILE.cv }}" target="_blank" rel="noopener" download>{{ T.cv }} <span>↓</span></a>{% endif %}
+            {% if PROFILE.cv_ats %}<a class="button button-secondary" href="{{ PROFILE.cv_ats }}" target="_blank" rel="noopener" download>{{ T.cv_ats }} <span>↓</span></a>{% endif %}
+            <a class="button button-secondary" href="#projects">{{ T.see_projects }} <span>↗️</span></a>
+          </div>
+          <div class="socials">
+            {% if PROFILE.linkedin %}<a href="{{ PROFILE.linkedin }}" target="_blank" rel="noopener">LinkedIn ↗️</a>{% endif %}
+            {% if PROFILE.github %}<a href="{{ PROFILE.github }}" target="_blank" rel="noopener">GitHub ↗️</a>{% endif %}
+            <span>{{ PROFILE.location }}</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="{{ T.aria_visual }}">
+          <div class="visual-top"><span>DATA OVERVIEW</span><span class="live"><i></i> ANALYTICS</span></div>
+          <div class="visual-number"><strong>DATA</strong><span>from insight to impact</span></div>
+          <div class="chart-bars"><i style="height:28%"></i><i style="height:44%"></i><i style="height:37%"></i><i style="height:64%"></i><i style="height:55%"></i><i style="height:82%"></i><i style="height:72%"></i><i style="height:100%"></i></div>
+          <div class="visual-bottom"><span>POWER BI</span><span>PYTHON</span><span>SQL</span></div>
+          <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        </div>
+      </header>
+
+      <section class="stats">
+        {% for item in STATS %}<div class="stat"><strong>{{ item.value }}</strong><span>{{ item.label }}</span></div>{% endfor %}
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-heading"><p class="kicker">{{ T.k_about }}</p><h2>{{ T.about_h|safe }}</h2></div>
+        <div class="about-layout">
+          <p class="about-lead">{{ PROFILE.about }}</p>
+          <div class="info-card"><span class="info-icon">⌖</span><div><small>{{ T.loc }}</small><strong>{{ PROFILE.location }}</strong></div><span class="info-icon">⌘</span><div><small>{{ T.formation }}</small><strong>{{ T.promo }}</strong></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section-heading"><p class="kicker">{{ T.k_exp }}</p><h2>{{ T.exp_h|safe }}</h2></div>
+        {% for job in EXPERIENCE %}
+        <article class="experience-card">
+          <div class="experience-date">{{ job.date }}</div>
+          <div><h3>{{ job.role }}</h3><p class="company">{{ job.company }}</p><p>{{ job.description }}</p>
+          <ul>{% for task in job.tasks %}<li>{{ task }}</li>{% endfor %}</ul></div>
+        </article>
+        {% endfor %}
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section-heading"><p class="kicker">{{ T.k_skills }}</p><h2>{{ T.skills_h|safe }}</h2><p class="section-intro">{{ T.skills_intro }}</p></div>
+        <div class="skills-grid">
+          {% for skill in SKILLS %}<article class="skill-card"><div class="skill-top"><span class="skill-symbol">{{ loop.index|string }}</span><span class="skill-category">{{ skill.category }}</span></div><h3>{{ skill.name }}</h3><p>{{ skill.description }}</p>
+          {% if skill.level %}<div class="level" title="{{ T.level }} : {{ skill.level }}%"><i style="--w:{{ skill.level }}%"></i></div>{% endif %}</article>{% endfor %}
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-heading"><p class="kicker">{{ T.k_projects }}</p><h2>{{ T.projects_h|safe }}</h2><p class="section-intro">{{ T.projects_intro }}</p></div>
+        <div class="projects-grid">
+          {% for project in PROJECTS %}
+          <article class="project-card {% if project.featured %}featured{% endif %}">
+            <div class="project-head"><span class="project-number">{{ project.number }}</span><span class="project-status">{{ project.status }}</span></div>
+            <p class="project-type">{{ project.type }}</p><h3>{{ project.title }}</h3><p class="project-summary">{{ project.summary }}</p>
+            <div class="project-details"><div><small>{{ T.objective }}</small><p>{{ project.problem }}</p></div><div><small>{{ T.approach }}</small><p>{{ project.approach }}</p></div></div>
+            <div class="tags">{% for tool in project.tools %}<span>{{ tool }}</span>{% endfor %}</div>
+            {% if project.github or project.demo %}
+            <div class="project-links">
+              {% if project.github %}<a href="{{ project.github }}" target="_blank" rel="noopener">GitHub ↗️</a>{% endif %}
+              {% if project.demo %}<a href="{{ project.demo }}" target="_blank" rel="noopener">Démo ↗️</a>{% endif %}
+            </div>
+            {% endif %}
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="section two-columns">
+        <div id="education"><div class="section-heading"><p class="kicker">{{ T.k_edu }}</p><h2>{{ T.edu_h }}</h2></div>
+          {% for e in EDUCATION %}<article class="simple-card"><span class="timeline-dot"></span><h3>{{ e.school }}</h3><strong>{{ e.degree }}</strong>{% if e.detail %}<p>{{ e.detail }}</p>{% endif %}<small>{{ e.date }}</small></article>{% endfor %}
+        </div>
+        <div id="certifications"><div class="section-heading"><p class="kicker">{{ T.k_cert }}</p><h2>{{ T.cert_h }}</h2></div>
+          {% for c in CERTIFICATIONS %}<article class="cert-card"><span class="cert-icon">✦</span><div><h3>{{ c.name }}</h3><p>{{ c.issuer }} · {{ c.detail }}</p></div></article>{% endfor %}
+          <div class="language-card"><h3>{{ T.lang_h }}</h3>{% for l in LANGUAGES %}<div class="language-row"><span>{{ l.name }}</span>{% if l.level != "À préciser" %}<span>{{ l.level }}</span>{% endif %}</div>{% endfor %}</div>
+        </div>
+      </section>
+
+      <section class="section" id="ml">
+        <div class="section-heading"><p class="kicker">{{ T.k_ml }}</p><h2>{{ T.ml_h|safe }}</h2><p class="section-intro">{{ T.ml_intro.format(n_train=n_train, n_test=n_test, acc=accuracy)|safe }}</p></div>
+        <div class="ml-layout">
+          <div class="ml-panel" id="mlSliders">
+            {% for s in sliders %}
+            <label class="ml-slider"><span>{{ s.label }} <b id="{{ s.id }}-v">{{ s.value }}</b></span>
+              <input type="range" id="{{ s.id }}" min="{{ s.min }}" max="{{ s.max }}" step="0.1" value="{{ s.value }}"></label>
+            {% endfor %}
+          </div>
+          <div class="ml-panel">
+            <small class="ml-small">{{ T.ml_pred }}</small>
+            <div class="ml-best" id="mlBest" data-err="{{ T.ml_err }}">—</div>
+            <div id="mlBars"></div>
+            <small class="ml-small">{{ T.ml_imp }}</small>
+            {% for i in importances %}<div class="ml-row"><span>{{ i.label }}</span><div class="level"><i style="--w:{{ i.p }}%;width:{{ i.p }}%"></i></div><em>{{ i.p }}%</em></div>{% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact">
+        <p class="kicker">{{ T.k_contact }}</p><h2>{{ T.contact_h|safe }}</h2>
+        <p>{{ T.contact_p }}</p>
+        {% if PROFILE.formspree %}
+        <form class="contact-form" action="{{ PROFILE.formspree }}" method="POST">
+          <input type="text" name="name" placeholder="{{ T.f_name }}" required>
+          <input type="email" name="email" placeholder="{{ T.f_email }}" required>
+          <textarea name="message" rows="4" placeholder="{{ T.f_msg }}" required></textarea>
+          <button class="button button-primary" type="submit">{{ T.f_send }} <span>↗️</span></button>
+        </form>
+        {% endif %}
+        <div class="hero-actions">
+          {% if PROFILE.email %}<a class="button button-primary" href="mailto:{{ PROFILE.email }}">{{ T.mail }}</a>{% endif %}
+          {% if PROFILE.linkedin %}<a class="button button-secondary" href="{{ PROFILE.linkedin }}" target="_blank" rel="noopener">{{ T.linkedin }}</a>{% endif %}
+        </div>
+      </section>
+    </main>
+    <footer><a class="brand" href="#home"><span class="brand-mark">M</span><span>Moncef<span class="accent">.</span></span></a><span>©️ {{ PROFILE.name }} · {{ T.footer }}</span><a href="#home">{{ T.top }}</a></footer>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
